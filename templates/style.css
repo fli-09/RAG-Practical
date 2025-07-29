@@ -1,0 +1,273 @@
+/* CSS Variables for the professional dark theme */
+:root {
+    --primary-accent: #22d3ee;
+    /* A vibrant cyan/teal */
+    --primary-accent-dark: #0891b2;
+    --bg-color: #0f172a;
+    /* Deep slate blue */
+    --surface-color: rgba(255, 255, 255, 0.05);
+    /* Translucent for glass effect */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #e2e8f0;
+    /* Light gray for body text */
+    --text-secondary: #94a3b8;
+    /* Muted gray for secondary text */
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* overflow: hidden;  <-- Remove this line to allow scrolling */
+    position: relative;
+}
+
+/* Animated Gradient "Aurora" Background */
+body::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background-image:
+        radial-gradient(circle at 20% 20%, #38bdf8, transparent 40%),
+        radial-gradient(circle at 80% 70%, #6366f1, transparent 40%);
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: move-aurora 20s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes move-aurora {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.container {
+    max-width: 420px;
+    width: 100%;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fade-in 0.8s ease-out;
+    /* Remove max-height and overflow-y to use default page scroll */
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Custom File Upload Area */
+.upload-area {
+    min-height: 160px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+    border-color: var(--primary-accent);
+    background-color: rgba(34, 211, 238, 0.05);
+}
+
+.upload-area-icon svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--primary-accent);
+    stroke-width: 1.5;
+    transition: transform 0.3s ease;
+}
+
+.upload-area:hover .upload-area-icon svg {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.upload-area-text {
+    color: var(--text-secondary);
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.upload-area-text span {
+    color: var(--primary-accent);
+    font-weight: 700;
+}
+
+#pdf_file {
+    display: none;
+}
+
+#file-info {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+    word-break: break-all;
+    min-height: 24px;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-field::placeholder {
+    color: var(--text-secondary);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.2);
+}
+
+/* Submit Button */
+.submit-btn {
+    background: var(--primary-accent);
+    color: var(--bg-color);
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: var(--primary-accent-dark);
+    box-shadow: 0 4px 20px rgba(34, 211, 238, 0.3);
+    transform: translateY(-3px);
+}
+
+.submit-btn:disabled {
+    background-color: #334155;
+    color: #64748b;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading Spinner */
+.loader {
+    width: 18px;
+    height: 18px;
+    border: 2px solid currentColor;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Result & Preview Area */
+#result-container {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+#preview-container {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+#preview-container embed {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: 340px;
+    display: block;
+}
+
+/* Footer */
+.footer {
+    margin-top: 2.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 98vw;
+        padding: 0.5rem 0.25rem;
+    }
+    .upload-area {
+        min-height: 120px;
+        padding: 0.75rem;
+    }
+} 
